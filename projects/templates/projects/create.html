@@ -32,32 +32,12 @@
         </header>
         <main>
             <div>
-                <h1>My Projects</h1>
-                <p>
-                    <a href="{% url 'create_project' %}">Create a new project</a>
-                </p>
-                {% if list_projects|length == 0 %}
-                    <p>You are not assigned to any projects</p>
-                {% else %}
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Number of tasks</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for project in list_projects %}
-                                <tr>
-                                    <td>
-                                        <a href="{% url 'show_project' project.id %}">{{ project.name }}</a>
-                                    </td>
-                                    <td>{{ project.tasks.all|length }}</td>
-                                </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                {% endif %}
+                <h1>Create a new project</h1>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button>Create</button>
+                </form>
             </div>
         </main>
     </body>
